@@ -1,7 +1,10 @@
 import Express from "express";
+import dotenv from 'dotenv';
 
 const app = Express();
 const port = 3000;
+
+dotenv.config();
 
 // Import Routes
 import authRoute from './routes/auth.js';
