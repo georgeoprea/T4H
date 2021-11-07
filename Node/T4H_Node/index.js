@@ -1,13 +1,21 @@
-import Express from "express";
+import Express from 'express';
 import dotenv from 'dotenv';
+import db from './model/database.js'
+
+// Import Routes
+import authRoute from './routes/auth.js';
+
+dotenv.config();
+
+// Test db connection
+db.authenticate()
+    .then(()=>console.log("Connected to db"))
+    .catch( err => console.log('Error: ' + err));
 
 const app = Express();
 const port = 3000;
 
-dotenv.config();
 
-// Import Routes
-import authRoute from './routes/auth.js';
 //Middleware
 app.use(Express.json());
 // Route Middlewares
