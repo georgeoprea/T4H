@@ -8,9 +8,10 @@ dotenv.config();
 
 // Import Routes
 import authRoute from './routes/auth.js';
-
+//Middleware
+app.use(Express.json());
 // Route Middlewares
-app.use('/api/user', authRoute);
+app.use('/api/auth', authRoute);
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
