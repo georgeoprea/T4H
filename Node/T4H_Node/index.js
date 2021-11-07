@@ -1,6 +1,7 @@
 import Express from 'express';
 import dotenv from 'dotenv';
-import db from './model/database.js'
+import db from './config/database.js';
+import users from './routes/users.js';
 
 // Import Routes
 import authRoute from './routes/auth.js';
@@ -20,6 +21,7 @@ const port = 3000;
 app.use(Express.json());
 // Route Middlewares
 app.use('/api/auth', authRoute);
+app.use('/api/users', users);
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
