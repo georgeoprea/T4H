@@ -1,5 +1,6 @@
 import Express from 'express';
 var router = Express.Router();
+import User from '../model/User.js'
 
 function isUserValid(user){
     const validEmail = typeof user.email == 'string' &&
@@ -14,9 +15,22 @@ router.post('/register', (req, res) => {
     // res.send("Register");
     console.log("req body " + req.body)
     if (isUserValid(req.body)){
-        res.json({
-            "message":"great"
+        console.log(req.body)
+        // res.sendStatus(200)
+        User.create({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            name: req.body.name,
+            role: "internal"
         })
+        .then(
+            user => res.send(user)
+        ).catch( err => {
+            console.log("Error when registering new user");
+            console.log(err);
+            res.sendStatus(400);
+        });
     } else {
         res.sendStatus(400);
     }

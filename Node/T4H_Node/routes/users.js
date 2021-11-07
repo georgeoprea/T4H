@@ -6,9 +6,8 @@ import router from "./auth.js";
 
 router.get('/getUsers', (req, res) => {
     User.findAll()
-    .then( user => {
-        console.log("User: " + user.name);
-        res.sendStatus(200);
+    .then( users => {
+        res.send(users);
     }).catch( err => {
         console.log("Error when retrieving all users.");
         console.log(err);
