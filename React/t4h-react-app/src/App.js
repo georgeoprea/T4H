@@ -6,6 +6,9 @@ import Users from './components/Users';
 import Login from './components/Login';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import $ from 'jquery';
+import ProtectedRoute from './components/ProtectedRoute';
+
+export const AuthContext = React.createContext();
 
 function isServerHealthy() {
   var context = this;
@@ -30,9 +33,10 @@ function App() {
       <div className="App">
         <Nav/>
         <Switch>
-          <Route path="/login" component={Login}/>
-          <Route path="/about" component={About}/>
-          <Route path="/users" component={Users}/>
+          <Route exact path="/login" component={Login}/>
+          <ProtectedRoute exact path="/users" component={Users}/>
+          <ProtectedRoute exact path="/about" component={About}/>
+          <Route path='*' component={() => "404 NOT FOUND"}/>
         </Switch>
       </div>
     </Router>
