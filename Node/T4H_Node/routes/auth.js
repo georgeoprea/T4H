@@ -1,6 +1,11 @@
 import Express from 'express';
+import db from '../config/database.js';
 var router = Express.Router();
-import User from '../model/User.js'
+import User from '../model/User.js';
+import session from 'express-session';
+
+import jwt from 'jsonwebtoken'
+
 
 function isUserValid(user){
     const validEmail = typeof user.email == 'string' &&
@@ -37,7 +42,25 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    res.send("Login")
+    const username = req.body.username;
+    const password = req.body.password;
+    User.findAll({
+        where: {
+            username: username
+        }
+    }).then(users => {
+        if(!!users && password == users[0].password){
+            const id = users[0].id;
+            const token = jwt.sign({id}, "jwtSecret");
+            res.json({
+                authenticated: true,
+                token: token,
+                user: users[0]
+            });
+        } else {
+            res.send({message: "Wrong username/password!"});
+        }
+    })
 });
 
 export default router;
