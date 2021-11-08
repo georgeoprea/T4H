@@ -15,4 +15,19 @@ router.get('/getUsers', (req, res) => {
     });
 });
 
+router.delete("/deleteUser", (req, res) => {
+    const username = req.body.username;
+    User.destroy(
+        {
+            where:{
+                username: username,
+                role: "external"
+            }
+        }).then(
+            () => { 
+                res.sendStatus(200);
+            }).catch(
+                ()=>res.sendStatus(404));
+});
+
 export default router;
