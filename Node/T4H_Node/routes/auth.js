@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
             email: req.body.email,
             password: req.body.password,
             name: req.body.name,
-            role: "internal"
+            role: req.body.role
         })
         .then(
             user => res.send(user)

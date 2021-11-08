@@ -20,13 +20,14 @@ router.delete("/deleteUser", (req, res) => {
     User.destroy(
         {
             where:{
-                username:username
+                username: username,
+                role: "external"
             }
         }).then(
             () => { 
                 res.sendStatus(200);
             }).catch(
-                ()=>res.send(404));
+                ()=>res.sendStatus(404));
 });
 
 export default router;
