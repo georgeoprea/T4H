@@ -1,27 +1,29 @@
 import '../App.css';
 import auth from '../auth.js';
 
-function Login (props) {
+function Register (props) {
   return (
     <div >
-        <h1>Login Page (Landing page)</h1>
+        <h1>Register Page</h1>
         <form>
             <label>
                 Username:
                 <input type="text" name='username'/>
             </label>
             <label>
+                Email:
+                <input type="text" name='email'/>
+            </label>
+            <label>
                 Password:
                 <input type="password" name='password' minLength='6'/>
             </label>
-            <input type='submit' value='Login' />
         </form>
-        <button>Don't have an account? Register</button>
-        {/* <button onClick={() => {
+        <button onClick={() => {
             auth.login(() => {
                 props.history.push("/about");
             });
-        }}> Login </button> */}
+        }}> Register </button>
     </div>
   );
 }
